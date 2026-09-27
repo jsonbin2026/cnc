@@ -14,3 +14,8 @@ android/gradle/wrapper/gradle-wrapper.jar
 *.a
 *.so
 .DS_Store
+
+# Python cache
+tools/__pycache__/
+__pycache__/
+*.pyc
