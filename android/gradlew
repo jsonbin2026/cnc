@@ -1,0 +1,20 @@
+#!/bin/sh
+# Minimal Gradle wrapper launcher. Requires the wrapper jar next to this file.
+# Run `gradle wrapper` once if gradle-wrapper.jar is missing.
+
+APP_HOME=$(cd "$(dirname "$0")" && pwd)
+CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+
+if [ ! -f "$CLASSPATH" ]; then
+    echo "Missing $CLASSPATH"
+    echo "Generate it with: gradle wrapper --gradle-version 8.7"
+    exit 1
+fi
+
+if [ -n "$JAVA_HOME" ]; then
+    JAVACMD=$JAVA_HOME/bin/java
+else
+    JAVACMD=java
+fi
+
+exec "$JAVACMD" -Xmx2048m -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"

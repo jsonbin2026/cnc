@@ -1,0 +1,16 @@
+# Build outputs
+gk/build/
+android/build/
+android/app/build/
+android/.gradle/
+android/local.properties
+android/.cxx/
+
+# Gradle wrapper binary (generated on demand)
+android/gradle/wrapper/gradle-wrapper.jar
+
+# Editor / OS
+*.o
+*.a
+*.so
+.DS_Store

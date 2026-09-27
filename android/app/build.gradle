@@ -1,0 +1,45 @@
+plugins {
+    id("com.android.application")
+}
+
+android {
+    namespace = "com.example.gk"
+    compileSdk = 34
+
+    defaultConfig {
+        applicationId = "com.example.gk"
+        minSdk = 24
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
+
+        externalNativeBuild {
+            cmake {
+                cFlags += "-std=c11"
+                arguments += "-DANDROID_STL=none"
+            }
+        }
+
+        ndk {
+            abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64")
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+}
