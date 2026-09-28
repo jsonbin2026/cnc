@@ -98,6 +98,8 @@ target_include_directories(gk PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>)
 
+set_target_properties(gk PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
 find_library(GK_MATH_LIB m)
 if(GK_MATH_LIB)
     target_link_libraries(gk PUBLIC ${GK_MATH_LIB})

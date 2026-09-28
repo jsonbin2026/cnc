@@ -5,6 +5,7 @@ plugins {
 android {
     namespace = "com.example.gk"
     compileSdk = 34
+    ndkVersion = "26.1.10909125"
 
     defaultConfig {
         applicationId = "com.example.gk"
