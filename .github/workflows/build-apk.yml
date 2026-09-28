@@ -18,19 +18,27 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install NDK and CMake
+      - name: Show preinstalled Android SDK
         run: |
-          sdkmanager "ndk;26.1.10909125" "cmake;3.22.1" "platforms;android-34" "build-tools;34.0.0"
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
+          ls -la "$ANDROID_HOME" || true
+          ls -la "$ANDROID_HOME/cmdline-tools" || true
+
+      - name: Install NDK, CMake and platform
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null 2>&1 || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;26.1.10909125" "cmake;3.22.1" "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Write local.properties
+        run: echo "sdk.dir=$ANDROID_HOME" > android/local.properties
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v3
 
       - name: Build debug APK
         working-directory: android
-        run: gradle assembleDebug
+        run: gradle assembleDebug --stacktrace
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
