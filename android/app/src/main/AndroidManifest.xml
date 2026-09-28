@@ -19,6 +19,15 @@
         </activity>
 
         <activity
+            android:name=".SimActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
+        <activity
+            android:name=".CatalogActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".SectionActivity"
             android:exported="false" />
 
